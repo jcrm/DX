@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{831C31E1-6DE1-4784-9146-747028B6BB72}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>wk3</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d10.lib;d3dx10d.lib;dxerr.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="blend.dds" />
+    <None Include="blendmap.dds" />
+    <None Include="brick01.dds" />
+    <None Include="buildshadowmap.fx" />
+    <None Include="checkboard.dds" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="darkdirt.dds" />
+    <None Include="defaultspec.dds" />
+    <None Include="grass.dds" />
+    <None Include="grass0.dds" />
+    <None Include="grassenvmap1024.dds" />
+    <None Include="ground0.dds" />
+    <None Include="ice.dds" />
+    <None Include="lightdirt.dds" />
+    <None Include="lighthelper.fx" />
+    <None Include="lighting.fx" />
+    <None Include="mesh.fx" />
+    <None Include="mountainScene513.raw" />
+    <None Include="multitex.fx" />
+    <None Include="sky.fx" />
+    <None Include="snow.dds" />
+    <None Include="stone.dds" />
+    <None Include="stone2.dds" />
+    <None Include="terrain.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Building.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="D3DApp.h" />
+    <ClInclude Include="D3DUtil.h" />
+    <ClInclude Include="DrawableTex2D.h" />
+    <ClInclude Include="Effects.h" />
+    <ClInclude Include="GameTimer.h" />
+    <ClInclude Include="GfxObj.h" />
+    <ClInclude Include="InBuilding.h" />
+    <ClInclude Include="InputLayouts.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Mouse.h" />
+    <ClInclude Include="OutBuilding.h" />
+    <ClInclude Include="Sky.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TextureMgr.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Building.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="D3DApp.cpp" />
+    <ClCompile Include="D3DUtil.cpp" />
+    <ClCompile Include="DrawableTex2D.cpp" />
+    <ClCompile Include="Effects.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
+    <ClCompile Include="GfxObj.cpp" />
+    <ClCompile Include="InBuilding.cpp" />
+    <ClCompile Include="InputLayouts.cpp" />
+    <ClCompile Include="OutBuilding.cpp" />
+    <ClCompile Include="SceneApp.cpp" />
+    <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TextureMgr.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

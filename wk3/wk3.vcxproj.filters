@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\FX Files">
+      <UniqueIdentifier>{7272f31e-eaac-42ae-a5a1-8ee1d15ccecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Image Files">
+      <UniqueIdentifier>{09625763-1b06-43d4-8d37-1c115d03d00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GfxObj Files">
+      <UniqueIdentifier>{dcb6d70f-803e-4e49-9874-d658c83181b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GfxObj Files">
+      <UniqueIdentifier>{f7ad51ee-9092-4785-9187-33a0fbfd7dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager Files">
+      <UniqueIdentifier>{00adea05-fbce-442b-8f5a-0d0ae64476c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager Files">
+      <UniqueIdentifier>{2a5f7c2d-8ad4-4168-89c6-071dd943076c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="terrain.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="buildshadowmap.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="lighthelper.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="lighting.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="mesh.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="multitex.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="sky.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
+    <None Include="mountainScene513.raw">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="blend.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="darkdirt.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="defaultspec.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="grass.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="grass0.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="grassenvmap1024.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="ground0.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="lightdirt.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="snow.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="stone.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="stone2.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="blendmap.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="brick01.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="ice.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+    <None Include="checkboard.dds">
+      <Filter>Resource Files\Image Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sky.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GfxObj.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableTex2D.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayouts.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMgr.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutBuilding.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InBuilding.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>Header Files\GfxObj Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GfxObj.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sky.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayouts.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableTex2D.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OutBuilding.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InBuilding.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>Source Files\GfxObj Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
