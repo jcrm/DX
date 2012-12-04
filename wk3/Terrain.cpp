@@ -94,7 +94,7 @@ void Terrain::setDirectionToSun(const D3DXVECTOR3& v){
 	D3DXVECTOR4 temp(v.x, v.y, v.z, 0.0f);
 	mfxDirToSunVar->SetFloatVector((float*)temp);
 }
-
+//test
 void Terrain::draw(){
 	mfxLayer0Var->SetResource(mLayer0);
 	mfxLayer1Var->SetResource(mLayer1);
