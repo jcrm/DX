@@ -115,6 +115,7 @@
     <ClInclude Include="InBuilding.h" />
     <ClInclude Include="InputLayouts.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Mirror.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OutBuilding.h" />
     <ClInclude Include="Sky.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="GfxObj.cpp" />
     <ClCompile Include="InBuilding.cpp" />
     <ClCompile Include="InputLayouts.cpp" />
+    <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="OutBuilding.cpp" />
     <ClCompile Include="SceneApp.cpp" />
     <ClCompile Include="Sky.cpp" />

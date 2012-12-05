@@ -1,0 +1,47 @@
+<<<<<<< HEAD
+Thumbs.db
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.sln.docstates
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+*.vssscc
+$tf*/
+ipch/wk3-71d5b4ce/wk3-c2cf7aa1.ipch
+wk3.opensdf
+wk3.sdf
+=======
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+>>>>>>> 094e40f307881902cf14f7b29e7c8afa81402a48
