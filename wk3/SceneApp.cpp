@@ -84,6 +84,10 @@ void SceneApp::initApp(){
 	thisCube.init(md3dDevice, cii);
 	thisSphere.init(md3dDevice,(3.142/5),10,10,cii);
 
+	Mirror::InitInfo mii;
+	mii.LayerMapFilename0	= L"ice.dds";
+	mii.SpecMapFilename		= L"defaultspec.dds";
+	mMirror.init(md3dDevice,mii);
 	mBuilding1.init(md3dDevice, 8, 12, 6);
 
 	mLightType = 0;
@@ -138,13 +142,14 @@ void SceneApp::drawScene(){
 	md3dDevice->OMSetDepthStencilState(0, 0);
 	float blendFactors[] = {0.0f, 0.0f, 0.0f, 0.0f};
 	md3dDevice->OMSetBlendState(0, blendFactors, 0xffffffff);
-
+	
 	mLand.draw();
-	thisCube.draw(mEyePos, mLights, mLightType);
+	/*thisCube.draw(mEyePos, mLights, mLightType);
 	thisSphere.Translate(5.0f,0.0f,0.0f);
 	thisSphere.draw(mEyePos, mLights, mLightType);
 	mBuilding1.Translate(0.0f,-1.0f,5.0f);
-	mBuilding1.draw(mEyePos, mLights, mLightType);
+	mBuilding1.draw(mEyePos, mLights, mLightType);*/
+	mMirror.draw();
 	// Draw sky last to save fill rate.
 	mSky.draw();
 	// We specify DT_NOCLIP, so we do not care about width/height of the rect.

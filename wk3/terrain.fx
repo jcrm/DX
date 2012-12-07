@@ -6,7 +6,6 @@
 
 
 #include "lighthelper.fx"
- 
 cbuffer cbPerFrame
 {
 	float4x4 gWorld;

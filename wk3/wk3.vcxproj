@@ -108,7 +108,6 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="D3DApp.h" />
     <ClInclude Include="D3DUtil.h" />
-    <ClInclude Include="DrawableTex2D.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GfxObj.h" />
@@ -131,7 +130,6 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="D3DApp.cpp" />
     <ClCompile Include="D3DUtil.cpp" />
-    <ClCompile Include="DrawableTex2D.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GfxObj.cpp" />

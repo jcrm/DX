@@ -141,9 +141,6 @@
     <ClInclude Include="Triangle.h">
       <Filter>Header Files\GfxObj Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableTex2D.h">
-      <Filter>Header Files\Manager Files</Filter>
-    </ClInclude>
     <ClInclude Include="Effects.h">
       <Filter>Header Files\Manager Files</Filter>
     </ClInclude>
@@ -210,9 +207,6 @@
       <Filter>Source Files\Manager Files</Filter>
     </ClCompile>
     <ClCompile Include="Effects.cpp">
-      <Filter>Source Files\Manager Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawableTex2D.cpp">
       <Filter>Source Files\Manager Files</Filter>
     </ClCompile>
     <ClCompile Include="OutBuilding.cpp">

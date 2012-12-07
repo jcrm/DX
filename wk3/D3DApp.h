@@ -26,6 +26,7 @@
 #include "DrawableTex2D.h"
 #include "Terrain.h"
 #include "Building.h"
+#include "Mirror.h"
 #include <string>
 
 class D3DApp{
@@ -68,6 +69,7 @@ protected:
 	Terrain		mLand;
 	Sky			mSky;
 	Building	mBuilding1;
+	Mirror		mMirror;
 
 	Light mLights[3];
 	int mLightType; // 0 (parallel), 1 (point), 2 (spot)
