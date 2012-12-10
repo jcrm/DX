@@ -6,17 +6,14 @@
 
 
 #include "lighthelper.fx"
- 
+ RasterizerState rs {CullMode = None;};
  
 cbuffer cbPerFrame
 {
 	Light gLight;
-	int gLightType;
 	float3 gEyePosW;
 };
-
-//bool gSpecularEnabled;
-
+ 
 cbuffer cbPerObject
 {
 	float4x4 gWorld;
@@ -31,8 +28,6 @@ Texture2D gSpecMap;
 SamplerState gTriLinearSam
 {
 	Filter = MIN_MAG_MIP_LINEAR;
-	AddressU=Mirror;
-	AddressV=Mirror;
 };
 
 struct VS_IN
@@ -81,17 +76,8 @@ float4 PS(VS_OUT pIn) : SV_Target
     
 	// Compute the lit color for this pixel.
     SurfaceInfo v = {pIn.posW, normalW, diffuse, spec};
-	float3 litColor;
-	if(gLightType == 0){	//Parallel
-		litColor = ParallelLight(v, gLight, gEyePosW,0);
-	}
-	else if(gLightType == 1){	//Parallel
-		litColor = PointLight(v, gLight, gEyePosW,0);
-	}
-	else if(gLightType == 2){	//Parallel
-		litColor = Spotlight(v, gLight, gEyePosW,0);
-	}
-
+	float3 litColor = ParallelLight(v, gLight, gEyePosW,1.0);
+    
     return float4(litColor, diffuse.a);
 }
 
@@ -99,6 +85,7 @@ technique10 MirrorTech
 {
     pass P0
     {
+		SetRasterizerState(rs);
         SetVertexShader( CompileShader( vs_4_0, VS() ) );
         SetGeometryShader( NULL );
         SetPixelShader( CompileShader( ps_4_0, PS() ) );

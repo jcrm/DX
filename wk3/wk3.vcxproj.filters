@@ -103,6 +103,9 @@
     <None Include="checkboard.dds">
       <Filter>Resource Files\Image Files</Filter>
     </None>
+    <None Include="mirror.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">

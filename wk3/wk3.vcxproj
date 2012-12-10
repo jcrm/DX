@@ -94,6 +94,7 @@
     <None Include="lighthelper.fx" />
     <None Include="lighting.fx" />
     <None Include="mesh.fx" />
+    <None Include="mirror.fx" />
     <None Include="mountainScene513.raw" />
     <None Include="multitex.fx" />
     <None Include="sky.fx" />

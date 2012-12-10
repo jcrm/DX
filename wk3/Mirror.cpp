@@ -11,6 +11,7 @@ Mirror::Mirror():mVB(0){
 	D3DXMatrixIdentity(&mProj);
 	D3DXMatrixIdentity(&mView);
 	D3DXMatrixIdentity(&mWVP);
+	D3DXMatrixIdentity(&mIdentityTexMtx);
 }
 Mirror::~Mirror(){
 
@@ -19,10 +20,10 @@ void Mirror::init(ID3D10Device* device, const InitInfo& initInfo){
 	md3dDevice = device;
 
 	mTech			 =fx::MirrorFX->GetTechniqueByName("MirrorTech");
-	mfxWVPVar		 =fx::MirrorFX->GetVariableByName("gWorld")->AsMatrix();
-	mfxWorldVar		 =fx::MirrorFX->GetVariableByName("gEyePosW")->AsMatrix();
-	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gLight");
-	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gWVP");
+	mfxWorldVar		 =fx::MirrorFX->GetVariableByName("gWorld")->AsMatrix();
+	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gEyePosW");
+	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gLight");
+	mfxWVPVar		 =fx::MirrorFX->GetVariableByName("gWVP")->AsMatrix();
 	mfxDiffuseMapVar =fx::MirrorFX->GetVariableByName("gDiffuseMap")->AsShaderResource();
 	mfxSpecMapVar	 =fx::MirrorFX->GetVariableByName("gSpecMap")->AsShaderResource();
 	mfxTexMtxVar	 =fx::MirrorFX->GetVariableByName("gTexMtx")->AsMatrix();
