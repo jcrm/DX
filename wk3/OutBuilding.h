@@ -13,7 +13,6 @@ public:
 		std::wstring LayerMapFilename0;
 		std::wstring LayerMapFilename1;
 		std::wstring LayerMapFilename2;
-		std::wstring BlendMapFilename;
 		std::wstring SpecMapFilename;
 	};
 	OutBuilding();
@@ -43,13 +42,9 @@ protected:
 	ID3D10ShaderResourceView* mLayer0;
 	ID3D10ShaderResourceView* mLayer1;
 	ID3D10ShaderResourceView* mLayer2;
-	ID3D10ShaderResourceView* mBlendMap;
 	ID3D10ShaderResourceView* mSpecMap;
 
 	ID3D10EffectShaderResourceVariable* mfxLayer0Var;
-	ID3D10EffectShaderResourceVariable* mfxLayer1Var;
-	ID3D10EffectShaderResourceVariable* mfxLayer2Var;
-	ID3D10EffectShaderResourceVariable* mfxBlendMapVar;
 	ID3D10EffectShaderResourceVariable* mfxSpecMapVar;
 
 	ID3D10EffectVariable* mfxEyePosVar;

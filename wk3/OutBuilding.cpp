@@ -8,8 +8,8 @@ OutBuilding::OutBuilding()
 md3dDevice(0), mVB(0), mIB(0), scale(1,1,1),pos(0,0,0),
 theta(0,0,0), mLayer0(0),mLayer1(0), mLayer2(0), 
 mfxSpecMapVar(0), mSpecMap(0) ,mfxWVPVar(0), mfxWorldVar(0), 
-mTech(0), mfxLayer0Var(0), mfxLayer1Var(0), mfxLayer2Var(0), 
-mfxEyePosVar(0), mfxLightVar(0), mfxLightType(0){
+mTech(0), mfxLayer0Var(0),mfxEyePosVar(0), mfxLightVar(0), 
+mfxLightType(0){
 	D3DXMatrixIdentity(&world);
 }
 
@@ -93,11 +93,11 @@ void OutBuilding::build(float w, float h, float d){
 	//Right
 	v.Update(width, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.Update(width, 0.0f, depth, 1.0f,  0.0f, 0.0f, 0.0,1.0);
+	v.Update(width, 0.0f, depth, 1.0f,  0.0f, 0.0f, 1.0,0.0);
 	vertices.push_back(v);
 	v.Update(width, height, depth, 1.0f,  0.0f, 0.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.Update(width, height, 0.0f, 1.0f,  0.0f, 0.0f, 1.0,0.0);
+	v.Update(width, height, 0.0f, 1.0f,  0.0f, 0.0f, 0.0,1.0);
 	vertices.push_back(v);
 
 	//Bottom
@@ -124,63 +124,63 @@ void OutBuilding::build(float w, float h, float d){
 	buildVB(vertices);
 
 	IndexList indices;
-
+	//front -l
 	indices.push_back(0);
 	indices.push_back(1);
 	indices.push_back(2);
 	indices.push_back(2);
 	indices.push_back(3);
 	indices.push_back(0);
-
+	//front -u
 	indices.push_back(4);
 	indices.push_back(2);
 	indices.push_back(6);
 	indices.push_back(6);
 	indices.push_back(5);
 	indices.push_back(4);
-
+	//front -r
 	indices.push_back(9);
 	indices.push_back(6);
 	indices.push_back(7);
 	indices.push_back(7);
 	indices.push_back(8);
 	indices.push_back(9);
-
+	//left
 	indices.push_back(10);
 	indices.push_back(13);
 	indices.push_back(12);
 	indices.push_back(12);
 	indices.push_back(11);
 	indices.push_back(10);
-
-	indices.push_back(14);
-	indices.push_back(15);
-	indices.push_back(16);
-	indices.push_back(16);
-	indices.push_back(17);
-	indices.push_back(14);
-
+	//right
 	indices.push_back(18);
 	indices.push_back(21);
 	indices.push_back(16);
 	indices.push_back(16);
 	indices.push_back(19);
 	indices.push_back(18);
-
-	indices.push_back(22);
-	indices.push_back(25);
-	indices.push_back(24);
-	indices.push_back(24);
-	indices.push_back(23);
-	indices.push_back(22);
-
+	//back
 	indices.push_back(26);
 	indices.push_back(27);
 	indices.push_back(28);
 	indices.push_back(28);
 	indices.push_back(29);
 	indices.push_back(26);
-
+	//top
+	indices.push_back(14);
+	indices.push_back(15);
+	indices.push_back(16);
+	indices.push_back(16);
+	indices.push_back(17);
+	indices.push_back(14);
+	//bottom
+	indices.push_back(22);
+	indices.push_back(25);
+	indices.push_back(24);
+	indices.push_back(24);
+	indices.push_back(23);
+	indices.push_back(22);
+	
 	mNumFaces    = (UINT)indices.size()/3;
 	mNumIndices  = (UINT)indices.size();
 	buildIB(indices);
@@ -193,13 +193,10 @@ D3DXMATRIX OutBuilding::GetWorld(){
 
 void OutBuilding::init (ID3D10Device* device, const InitInfo& initInfo, float w, float h, float d){
 	md3dDevice=		device;
-	mTech			= fx::OutBuildingFX->GetTechniqueByName("MultiTexTech");
+	mTech			= fx::OutBuildingFX->GetTechniqueByName("BuildTech");
 	mfxWVPVar		= fx::OutBuildingFX->GetVariableByName("gWVP")->AsMatrix();
 	mfxWorldVar		= fx::OutBuildingFX->GetVariableByName("gWorld")->AsMatrix();
 	mfxLayer0Var	= fx::OutBuildingFX->GetVariableByName("gLayer0")->AsShaderResource();
-	mfxLayer1Var	= fx::OutBuildingFX->GetVariableByName("gLayer1")->AsShaderResource();
-	mfxLayer2Var	= fx::OutBuildingFX->GetVariableByName("gLayer2")->AsShaderResource();
-	mfxBlendMapVar	= fx::OutBuildingFX->GetVariableByName("gBlendMap")->AsShaderResource();
 	mfxSpecMapVar	= fx::OutBuildingFX->GetVariableByName("gSpecMap")->AsShaderResource();
 	mfxEyePosVar	= fx::OutBuildingFX->GetVariableByName("gEyePosW");
 	mfxLightVar		= fx::OutBuildingFX->GetVariableByName("gLight");
@@ -212,7 +209,6 @@ void OutBuilding::init (ID3D10Device* device, const InitInfo& initInfo, float w,
 	mLayer0   = GetTextureMgr().createTex(initInfo.LayerMapFilename0);
 	mLayer1   = GetTextureMgr().createTex(initInfo.LayerMapFilename1);
 	mLayer2   = GetTextureMgr().createTex(initInfo.LayerMapFilename2);
-	mBlendMap = GetTextureMgr().createTex(initInfo.BlendMapFilename);
 	mSpecMap  = GetTextureMgr().createTex(initInfo.SpecMapFilename);
 }
 void OutBuilding::buildVB(VertexPNTList& vertices){
@@ -242,10 +238,6 @@ void OutBuilding::buildIB(IndexList& indices){
     HR(md3dDevice->CreateBuffer( &bufferDesc, &InitData, &mIB));
 }
 void OutBuilding::draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType){
-	mfxLayer0Var->SetResource(mLayer0);
-	mfxLayer1Var->SetResource(mLayer1);
-	mfxLayer2Var->SetResource(mLayer2);
-	mfxBlendMapVar->SetResource(mBlendMap);
 	mfxSpecMapVar->SetResource(mSpecMap);
 	md3dDevice->IASetInputLayout(InputLayout::PosNormalTex);
     md3dDevice->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);  
@@ -263,14 +255,32 @@ void OutBuilding::draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType){
 	mfxWVPVar->SetMatrix((float*)&WVP);
 	mfxWorldVar->SetMatrix((float*)&world);
 
-	UINT stride = sizeof(VertexPNT);
-	UINT offset = 0;
+	
 	D3D10_TECHNIQUE_DESC techDesc;
 	mTech->GetDesc( &techDesc );
 	for(UINT p = 0; p < techDesc.Passes; ++p){
-		mTech->GetPassByIndex( p )->Apply(0);        
+		ID3D10EffectPass* pass = mTech->GetPassByIndex( p );
+        
+		UINT stride = sizeof(VertexPNT);
+		UINT offset = 0;
+
 		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
-		md3dDevice->DrawIndexed(mNumIndices, 0,0);
+
+		mfxLayer0Var->SetResource(mLayer0);
+		pass->Apply(0);
+		md3dDevice->DrawIndexed(36, 0,0);
+
+		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
+		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
+		mfxLayer0Var->SetResource(mLayer1);
+		pass->Apply(0);
+		md3dDevice->DrawIndexed(6, 36,0);
+
+		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
+		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
+		mfxLayer0Var->SetResource(mLayer2);
+		pass->Apply(0);
+		md3dDevice->DrawIndexed(6, 42,0);
 	}
 }

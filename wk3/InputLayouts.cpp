@@ -41,7 +41,12 @@ void InputLayout::InitAll(ID3D10Device* device)
 	fx::SphereFX->GetTechniqueByName("MultiTexTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
     HR(device->CreateInputLayout(posNormalTexVertexDesc, 3, PassDesc.pIAInputSignature,
 		PassDesc.IAInputSignatureSize, &PosNormalTex));
-
+	fx::InBuildingFX->GetTechniqueByName("BuildingTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
+    HR(device->CreateInputLayout(posNormalTexVertexDesc, 3, PassDesc.pIAInputSignature,
+		PassDesc.IAInputSignatureSize, &PosNormalTex));
+	fx::OutBuildingFX->GetTechniqueByName("BuildingTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
+    HR(device->CreateInputLayout(posNormalTexVertexDesc, 3, PassDesc.pIAInputSignature,
+		PassDesc.IAInputSignatureSize, &PosNormalTex));
 	// 
 	// Position-tangent-normal-texture vertex
 	//

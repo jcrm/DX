@@ -69,7 +69,7 @@ void SceneApp::initApp(){
 	tii.LayerMapFilename4 = L"snow.dds";
 	tii.BlendMapFilename  = L"blend.dds";
 	tii.HeightScale  = 0.85f;
-	tii.HeightOffset = -1.0f;
+	tii.HeightOffset = -2.0f;
 	tii.NumRows      = 513;
 	tii.NumCols      = 513;
 	tii.CellSpacing  = 1.0f;
@@ -95,7 +95,7 @@ void SceneApp::initApp(){
 	mLightType = 0;
 	// Parallel light.
 	mLights[0].dir      = D3DXVECTOR3(0.57735f, -0.57735f, 0.57735f);
-	mLights[0].ambient  = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.0f);
+	mLights[0].ambient  = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.0f);
 	mLights[0].diffuse  = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	mLights[0].specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	mLand.setDirectionToSun(-mLights[0].dir);
@@ -149,10 +149,10 @@ void SceneApp::drawScene(){
 	thisCube.draw(mEyePos, mLights, mLightType);
 	thisSphere.Translate(5.0f,0.0f,0.0f);
 	thisSphere.draw(mEyePos, mLights, mLightType);
-	mBuilding1.Translate(0.0f,-1.0f,5.0f);
+	mBuilding1.Translate(0.0f,-2.0f,5.0f);
 	mBuilding1.draw(mEyePos, mLights, mLightType);
-	mMirror.Translate(0.0f,0.0f,-5.0f);
-	mMirror.draw();
+	mMirror.Translate(8.0f,-2.0f,20.8f);
+	mMirror.draw(mEyePos, mLights);
 	// Draw sky last to save fill rate.
 	mSky.draw();
 	// We specify DT_NOCLIP, so we do not care about width/height of the rect.

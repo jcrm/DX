@@ -61,6 +61,18 @@
     <Filter Include="Resource Files\FX Files\Common">
       <UniqueIdentifier>{043569e4-236a-410a-9461-35081e570707}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GfxObj Files\Environment Files">
+      <UniqueIdentifier>{04b35bc4-f5ae-497d-a58b-390180b3603f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GfxObj Files\Shapes Files">
+      <UniqueIdentifier>{6a4b1399-6810-4bd9-98a9-2fde6aa71053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GfxObj Files\Shape Filters">
+      <UniqueIdentifier>{e974c90e-033a-490a-8942-629ca6601944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GfxObj Files\Environment Files">
+      <UniqueIdentifier>{fe0e8d54-6dd5-4a04-a734-b2dcd75b4ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
@@ -133,27 +145,16 @@
     <None Include="lighthelper.fx">
       <Filter>Resource Files\FX Files\Common</Filter>
     </None>
+    <None Include="ClassDiagram2.cd" />
+    <None Include="building.fx">
+      <Filter>Resource Files\FX Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files\GfxObj Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sky.h">
-      <Filter>Header Files\GfxObj Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\GfxObj Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\GfxObj Files</Filter>
-    </ClInclude>
     <ClInclude Include="GfxObj.h">
-      <Filter>Header Files\GfxObj Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
       <Filter>Header Files\GfxObj Files</Filter>
     </ClInclude>
     <ClInclude Include="Effects.h">
@@ -195,6 +196,21 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Component Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\GfxObj Files\Shape Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\GfxObj Files\Shape Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\GfxObj Files\Shape Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\GfxObj Files\Environment Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sky.h">
+      <Filter>Header Files\GfxObj Files\Environment Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3DApp.cpp">
@@ -203,22 +219,7 @@
     <ClCompile Include="SceneApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Source Files\GfxObj Files</Filter>
-    </ClCompile>
     <ClCompile Include="GfxObj.cpp">
-      <Filter>Source Files\GfxObj Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sky.cpp">
-      <Filter>Source Files\GfxObj Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\GfxObj Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files\GfxObj Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
       <Filter>Source Files\GfxObj Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureMgr.cpp">
@@ -250,6 +251,21 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\GfxObj Files\Shapes Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\GfxObj Files\Shapes Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\GfxObj Files\Shapes Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sky.cpp">
+      <Filter>Source Files\GfxObj Files\Environment Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\GfxObj Files\Environment Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

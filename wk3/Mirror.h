@@ -18,7 +18,7 @@ public:
 	~Mirror();
 	void init(ID3D10Device* device, const InitInfo& initInfo);
 	void build();
-	void draw();
+	void draw(D3DXVECTOR3 mEyePos, Light mLights[]);
 	void setTrans();
 	void Translate(float x, float y, float z);
 protected:
@@ -38,7 +38,7 @@ protected:
 	ID3D10BlendState* mDrawReflectionBS;
 	ID3D10DepthStencilState* mDrawMirrorDSS;
 	ID3D10DepthStencilState* mDrawReflectionDSS;
-
+	
 	ID3D10EffectTechnique* mTech;
 	ID3D10EffectMatrixVariable* mfxWVPVar;
 	ID3D10EffectMatrixVariable* mfxWorldVar;

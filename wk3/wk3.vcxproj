@@ -79,8 +79,10 @@
   <ItemGroup>
     <None Include="blend.dds" />
     <None Include="blendmap.dds" />
+    <None Include="building.fx" />
     <None Include="buildshadowmap.fx" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="darkdirt.dds" />
     <None Include="defaultspec.dds" />
     <None Include="grass.dds" />

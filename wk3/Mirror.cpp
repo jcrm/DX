@@ -7,7 +7,7 @@
 #include "D3DUtil.h"
 
 Mirror::Mirror():scale(1,1,1),pos(0,0,0),theta(0,0,0){
-	D3DXMatrixTranslation(&mReflectWorld, 0.0f, 1.0f, -4.0f);
+	D3DXMatrixTranslation(&mReflectWorld, 2.0f, 1.0f, -4.0f);
 	D3DXMatrixIdentity(&mWorld);
 	D3DXMatrixIdentity(&mProj);
 	D3DXMatrixIdentity(&mView);
@@ -20,7 +20,6 @@ Mirror::~Mirror(){
 void Mirror::init(ID3D10Device* device, const InitInfo& initInfo){
 	md3dDevice = device;
 	mCrate.initR(md3dDevice);
-
 	mTech			 =fx::MirrorFX->GetTechniqueByName("MirrorTech");
 	mfxWVPVar		 =fx::MirrorFX->GetVariableByName("gWVP")->AsMatrix();
 	mfxWorldVar		 =fx::MirrorFX->GetVariableByName("gWorld")->AsMatrix();
@@ -29,6 +28,7 @@ void Mirror::init(ID3D10Device* device, const InitInfo& initInfo){
 	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gEyePosW");
 	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gLight");
 	mfxTexMtxVar	 =fx::MirrorFX->GetVariableByName("gTexMtx")->AsMatrix();
+
 
 	mInfo = initInfo;
 
@@ -129,7 +129,7 @@ void Mirror::build(){
     vinitData.pSysMem = &vertices[0];
     HR(md3dDevice->CreateBuffer(&vbd, &vinitData, &mVB));
 }
-void Mirror::draw(){
+void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 	setTrans();
 	md3dDevice->OMSetDepthStencilState(0,0);
 	float blendFactors[]= {0.0f, 0.0f, 0.0f, 0.0f};
@@ -140,12 +140,6 @@ void Mirror::draw(){
 	D3DXMATRIX mView = GetCamera().view();
 	D3DXMATRIX mProj = GetCamera().proj();
 	
-	Light mParallelLight;
-	mParallelLight.dir		= D3DXVECTOR3(0.57735f, -0.57735f,0.57735f);
-	mParallelLight.ambient	= D3DXCOLOR(0.4f,0.4f,0.4f,1.0f);
-	mParallelLight.diffuse	= D3DXCOLOR(1.0f,1.0f,1.0f,1.0f);
-	mParallelLight.specular	= D3DXCOLOR(1.0f,1.0f,1.0f,1.0f);
-	mEyePos = GetCamera().position();
 
 	D3D10_TECHNIQUE_DESC techDesc;
 	mTech->GetDesc(&techDesc);
@@ -154,12 +148,12 @@ void Mirror::draw(){
 		ID3D10EffectPass* pass = mTech->GetPassByIndex(p);
 		
 		mfxEyePosVar->SetRawValue(&mEyePos, 0, sizeof(D3DXVECTOR3));
-		mfxLightVar->SetRawValue(&mParallelLight,0,sizeof(Light));
+		mfxLightVar->SetRawValue(&mLights[0],0,sizeof(Light));
 
 		UINT stride = sizeof(VertexPNT);
 		UINT offset = 0;
 
-		mWVP = mReflectWorld*mView*mProj;
+		mWVP = mReflectWorld*mWorld*mView*mProj;
 		mfxWVPVar->SetMatrix((float*)&mWVP);
 		mfxWorldVar->SetMatrix((float*)&mReflectWorld);
 		mfxDiffuseMapVar->SetResource(mObjectsDiffuseMapRV);
@@ -184,10 +178,11 @@ void Mirror::draw(){
 
 		md3dDevice->OMSetDepthStencilState(0,0);
 		//draw reflected world
-		D3DXPLANE mirrorPlane(0.0f, 0.0f, 1.0f, 0.0f); // xy plane
+		D3DXPLANE mirrorPlane(0.0, 0.0f, 1, 0.0f); // xy plane
 		 
 		D3DXMATRIX R;
 		_tmp_D3DXMatrixReflect(&R, &mirrorPlane);
+		R*=mWorld;
 		D3DXMATRIX W = mReflectWorld*R;
 		mWVP = W*mView*mProj;
 		mfxWVPVar->SetMatrix((float*)&mWVP);
@@ -196,10 +191,10 @@ void Mirror::draw(){
 		mfxSpecMapVar->SetResource(mSpecMap);
 		mfxTexMtxVar->SetMatrix((float*)&mIdentityTexMtx);
 
-		D3DXVECTOR3 oldDir = mParallelLight.dir;
-		D3DXVec3TransformNormal(&mParallelLight.dir, &mParallelLight.dir, &R);
-		mfxLightVar->SetRawValue(&mParallelLight, 0, sizeof(Light));	
-        pass->Apply(0);
+		D3DXVECTOR3 oldDir = mLights[0].dir;
+		D3DXVec3TransformNormal(&mLights[0].dir, &mLights[0].dir, &R);
+		mfxLightVar->SetRawValue(&mLights[0], 0, sizeof(Light));	
+		pass->Apply(0);
 
 		md3dDevice->RSSetState(mCullCWRS);
 		float blendf[] = {0.65f, 0.65f, 0.65f, 1.0f};
@@ -210,28 +205,22 @@ void Mirror::draw(){
 		md3dDevice->OMSetDepthStencilState(0, 0);
 		md3dDevice->OMSetBlendState(0, blendf, 0xffffffff);
 		md3dDevice->RSSetState(0);	
-		mParallelLight.dir = oldDir; // restore
+		mLights[0].dir = oldDir; // restore
 	}
 }
 void Mirror::setTrans(void){
 	D3DXMATRIX m;
-	D3DXMatrixTranslation(&mReflectWorld, 0.0f, 1.0f, -4.0f);
 	D3DXMatrixIdentity(&mWorld);
 	D3DXMatrixScaling(&m, scale.x, scale.y, scale.z);
 	mWorld*=m;
-	mReflectWorld*=m;
 	D3DXMatrixRotationY(&m, theta.x);
 	mWorld*=m;
-	mReflectWorld*=m;
 	D3DXMatrixRotationY(&m, theta.y);
 	mWorld*=m;
-	mReflectWorld*=m;
 	D3DXMatrixRotationY(&m, theta.z);
 	mWorld*=m;
-	mReflectWorld*=m;
 	D3DXMatrixTranslation(&m, pos.x, pos.y, pos.z);
 	mWorld*=m;
-	mReflectWorld*=m;
 }
 void Mirror::Translate(float x, float y, float z){
 	pos.x = x;

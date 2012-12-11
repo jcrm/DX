@@ -4,7 +4,7 @@ ID3D10Effect* fx::SkyFX				= 0;
 ID3D10Effect* fx::TerrainFX			= 0;
 ID3D10Effect* fx::MeshFX			= 0;
 ID3D10Effect* fx::BuildShadowMapFX	= 0;
-ID3D10Effect* fx::MultiCubeFX			= 0;
+ID3D10Effect* fx::MultiCubeFX		= 0;
 ID3D10Effect* fx::SphereFX			= 0;
 ID3D10Effect* fx::MirrorFX			= 0;
 ID3D10Effect* fx::OutBuildingFX		= 0;
@@ -42,11 +42,11 @@ void fx::InitAll(ID3D10Device* device)
 	TerrainFX        = CreateFX(device, L"terrain.fx");
 	MeshFX           = CreateFX(device, L"mesh.fx");
 	BuildShadowMapFX = CreateFX(device, L"buildshadowmap.fx");
-	MultiCubeFX			= CreateFX(device, L"multitex.fx");
+	MultiCubeFX		 = CreateFX(device, L"multitex.fx");
 	SphereFX		 = CreateFX(device, L"multitex.fx");
 	MirrorFX		 = CreateFX(device, L"mirror.fx");
-	OutBuildingFX	 = CreateFX(device, L"multitex.fx");
-	InBuildingFX	 = CreateFX(device, L"multitex.fx");
+	OutBuildingFX	 = CreateFX(device, L"building.fx");
+	InBuildingFX	 = CreateFX(device, L"building.fx");
 }
 
 void fx::DestroyAll()

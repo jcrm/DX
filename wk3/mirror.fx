@@ -39,6 +39,7 @@ struct VS_IN
 struct VS_OUT
 {
 	float4 posH    : SV_POSITION;
+	float shade    : SHADE;
     float3 posW    : POSITION;
     float3 normalW : NORMAL;
     float2 texC    : TEXCOORD;
@@ -64,6 +65,7 @@ VS_OUT VS(VS_IN vIn)
 float4 PS(VS_OUT pIn) : SV_Target
 {
 	// Get materials from texture maps.
+
 	float4 diffuse = gDiffuseMap.Sample( gTriLinearSam, pIn.texC );
 	float4 spec    = gSpecMap.Sample( gTriLinearSam, pIn.texC );
 	
@@ -75,7 +77,7 @@ float4 PS(VS_OUT pIn) : SV_Target
     
 	// Compute the lit color for this pixel.
     SurfaceInfo v = {pIn.posW, normalW, diffuse, spec};
-	float3 litColor = ParallelLight(v, gLight, gEyePosW,1.0);
+	float3 litColor = ParallelLight(v, gLight, gEyePosW, 0);
     
     return float4(litColor, diffuse.a);
 }
