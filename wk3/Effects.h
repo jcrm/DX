@@ -10,7 +10,7 @@ namespace fx
 	extern ID3D10Effect* MeshFX;
 	extern ID3D10Effect* BuildShadowMapFX;
 	extern ID3D10Effect* SphereFX;
-	extern ID3D10Effect* CubeFX;
+	extern ID3D10Effect* MultiCubeFX;
 	extern ID3D10Effect* MirrorFX;
 	extern ID3D10Effect* OutBuildingFX;
 	extern ID3D10Effect* InBuildingFX;

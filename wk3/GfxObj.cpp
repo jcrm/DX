@@ -131,5 +131,5 @@ void GfxObj::drawR(){
 	UINT offset = 0;
 	md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 	md3dDevice->IASetIndexBuffer(mIB, DXGI_FORMAT_R32_UINT, 0);
-	md3dDevice->DrawIndexed(mNumFaces*3, 0, 0);
+	md3dDevice->DrawIndexed(mNumIndices, 0, 0);
 }

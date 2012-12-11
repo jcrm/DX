@@ -4,6 +4,7 @@
 #include <string>
 #include "Effects.h"
 #include "D3DUtil.h"
+#include "Cube.h"
 #include "Box.h"
 #include "Vertex.h"
 
@@ -19,13 +20,15 @@ public:
 	void init(ID3D10Device* device, const InitInfo& initInfo);
 	void build();
 	void draw();
-
+	void setTrans();
+	void Translate(float x, float y, float z);
 protected:
 	DWORD mNumVertices;
 	DWORD mNumFaces;
 	DWORD mNumIndices;
+	D3DXVECTOR3 pos, theta, scale;	
 
-	Box mCrateMesh;
+	Cube mCrate;
 
 	InitInfo mInfo;
 	ID3D10Device* md3dDevice;

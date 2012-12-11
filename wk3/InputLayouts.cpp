@@ -35,7 +35,7 @@ void InputLayout::InitAll(ID3D10Device* device)
     fx::TerrainFX->GetTechniqueByName("TerrainTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
     HR(device->CreateInputLayout(posNormalTexVertexDesc, 3, PassDesc.pIAInputSignature,
 		PassDesc.IAInputSignatureSize, &PosNormalTex));
-	fx::CubeFX->GetTechniqueByName("MultiTexTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
+	fx::MultiCubeFX->GetTechniqueByName("MultiTexTech")->GetPassByIndex(0)->GetDesc(&PassDesc);
     HR(device->CreateInputLayout(posNormalTexVertexDesc, 3, PassDesc.pIAInputSignature,
 		PassDesc.IAInputSignatureSize, &PosNormalTex));
 	fx::SphereFX->GetTechniqueByName("MultiTexTech")->GetPassByIndex(0)->GetDesc(&PassDesc);

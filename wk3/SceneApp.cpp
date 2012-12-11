@@ -145,11 +145,12 @@ void SceneApp::drawScene(){
 	md3dDevice->OMSetBlendState(0, blendFactors, 0xffffffff);
 	
 	mLand.draw();
-	/*thisCube.draw(mEyePos, mLights, mLightType);
+	thisCube.draw(mEyePos, mLights, mLightType);
 	thisSphere.Translate(5.0f,0.0f,0.0f);
 	thisSphere.draw(mEyePos, mLights, mLightType);
 	mBuilding1.Translate(0.0f,-1.0f,5.0f);
-	mBuilding1.draw(mEyePos, mLights, mLightType);*/
+	mBuilding1.draw(mEyePos, mLights, mLightType);
+	mMirror.Translate(0.0f,0.0f,-5.0f);
 	mMirror.draw();
 	// Draw sky last to save fill rate.
 	mSky.draw();

@@ -173,18 +173,6 @@ void D3DApp::updateScene(float dt){
 		frameCnt = 0;
 		t_base  += 1.0f;
 	}
-	if(GetAsyncKeyState(VK_DOWN)& 0x8000 ){
-		thisCube.Translate(thisCube.GetPosX(),thisCube.GetPosY()-0.001,thisCube.GetPosZ());
-	}
-	if(GetAsyncKeyState(VK_UP) & 0x8000){
-		thisCube.Translate(thisCube.GetPosX(),thisCube.GetPosY()+0.001,thisCube.GetPosZ());
-	}
-	if(GetAsyncKeyState(VK_LEFT) & 0x8000){
-		thisCube.Translate(thisCube.GetPosX()-0.001,thisCube.GetPosY(),thisCube.GetPosZ());
-	}
-	if(GetAsyncKeyState(VK_RIGHT) & 0x8000){
-		thisCube.Translate(thisCube.GetPosX()+0.001,thisCube.GetPosY(),thisCube.GetPosZ());
-	}
 	// Update angles based on input to orbit camera around scene.
 	if(GetAsyncKeyState('A') & 0x8000)	GetCamera().MoveLeft();
 	if(GetAsyncKeyState('D') & 0x8000)	GetCamera().MoveRight();

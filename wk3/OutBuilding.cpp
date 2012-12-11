@@ -47,113 +47,77 @@ void OutBuilding::build(float w, float h, float d){
 	float twothirdwidth = (2*w)/3;
 	float twothirdheight = (2*h)/3;
 	//Front
-	v.normal = D3DXVECTOR3( 0.0f,  0.0f, -1.0f);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(0.0f, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, height, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(0.0f, height, 0.0f, 0.0f,  0.0f, -1.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(thrirdwidth, height, 0.0f);
-	v.texC = D3DXVECTOR2(0.4,1.0);
+	v.Update(thrirdwidth, height, 0.0f, 0.0f,  0.0f, -1.0f, 0.4,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(thrirdwidth, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.4,0.0);
+	v.Update(thrirdwidth, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 0.4,0.0);
 	vertices.push_back(v);
 
-	v.pos = D3DXVECTOR3(thrirdwidth, twothirdheight, 0.0f);
-	v.texC = D3DXVECTOR2(0.4,0.7);
+	v.Update(thrirdwidth, twothirdheight, 0.0f, 0.0f,  0.0f, -1.0f, 0.4,0.7);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(twothirdwidth, twothirdheight, 0.0f);
-	v.texC = D3DXVECTOR2(0.8,0.7);
+	v.Update(twothirdwidth, twothirdheight, 0.0f, 0.0f,  0.0f, -1.0f, 0.8,0.7);
 	vertices.push_back(v);
 
-	v.pos = D3DXVECTOR3(twothirdwidth, height, 0.0f);
-	v.texC = D3DXVECTOR2(0.8,1.0);
+	v.Update(twothirdwidth, height, 0.0f, 0.0f,  0.0f, -1.0f, 0.8,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, 0.0f);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(width, height, 0.0f, 0.0f,  0.0f, -1.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(width, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 1.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(twothirdwidth, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.8,0.0);
+	v.Update(twothirdwidth, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 0.8,0.0);
 	vertices.push_back(v);
 
 	//Left Face
-	v.normal = D3DXVECTOR3( -1.0f,  0.0f, 0.0f);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(0.0f, 0.0f, 0.0f, -1.0f,  0.0f, 0.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, height, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(0.0f, height, 0.0f, -1.0f,  0.0f, 0.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, height, depth);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(0.0f, height, depth, -1.0f,  0.0f, 0.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, depth);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(0.0f, 0.0f, depth, -1.0f,  0.0f, 0.0f, 1.0,0.0);
 	vertices.push_back(v);
 
 	//Top
-	v.normal = D3DXVECTOR3( 0.0f,  1.0f, 0.0f);
-	v.pos = D3DXVECTOR3(0.0f, height, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(0.0f, height, 0.0f, 0.0f,  1.0f, 0.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, height, depth);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(0.0f, height, depth, 0.0f,  1.0f, 0.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, depth);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(width, height, depth, 0.0f,  1.0f, 0.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, 0.0f);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(width, height, 0.0f, 0.0f,  1.0f, 0.0f, 1.0,0.0);
 	vertices.push_back(v);
 
 	//Right
-	v.normal = D3DXVECTOR3( 1.0f,  0.0f, 0.0f);
-	v.pos = D3DXVECTOR3(width, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(width, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, 0.0f, depth);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(width, 0.0f, depth, 1.0f,  0.0f, 0.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, depth);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(width, height, depth, 1.0f,  0.0f, 0.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, 0.0f);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(width, height, 0.0f, 1.0f,  0.0f, 0.0f, 1.0,0.0);
 	vertices.push_back(v);
 
 	//Bottom
-	v.normal = D3DXVECTOR3( 0.0f,  -1.0f, 0.0f);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(0.0f, 0.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, depth);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(0.0f, 0.0f, depth, 0.0f,  -1.0f, 0.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, 0.0f, depth);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(width, 0.0f, depth, 0.0f,  -1.0f, 0.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, 0.0f, 0.0f);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(width, 0.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 1.0,0.0);
 	vertices.push_back(v);
 
 	//Back
-	v.normal = D3DXVECTOR3( 0.0f,  0.0f, 1.0f);
-	v.pos = D3DXVECTOR3(width, 0.0f, depth);
-	v.texC = D3DXVECTOR2(0.0,0.0);
+	v.Update(width, 0.0f, depth, 0.0f,  0.0f, 1.0f, 0.0,0.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(width, height, depth);
-	v.texC = D3DXVECTOR2(0.0,1.0);
+	v.Update(width, height, depth, 0.0f,  0.0f, 1.0f, 0.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, height, depth);
-	v.texC = D3DXVECTOR2(1.0,1.0);
+	v.Update(0.0f, height, depth, 0.0f,  0.0f, 1.0f, 1.0,1.0);
 	vertices.push_back(v);
-	v.pos = D3DXVECTOR3(0.0f, 0.0f, depth);
-	v.texC = D3DXVECTOR2(1.0,0.0);
+	v.Update(0.0f, 0.0f, depth, 0.0f,  0.0f, 1.0f, 1.0,0.0);
 	vertices.push_back(v);
 
 	mNumVertices = (UINT)vertices.size();

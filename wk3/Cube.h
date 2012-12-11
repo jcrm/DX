@@ -11,12 +11,10 @@ public:
 	void draw();
 	void init(ID3D10Device* device, const InitInfo& initInfo);
 	void init(ID3D10Device* device);
-	void init(ID3D10Device* device, bool temp, int t);
+	void initR(ID3D10Device* device);
 	void buildVB();
 	void buildIB();
-	float GetPosX();
-	float GetPosY();
-	float GetPosZ();
+	void CreateFX();
 
 private:
 };
