@@ -23,7 +23,6 @@
 #include "TextureMgr.h"
 #include "Sky.h"
 #include "Mouse.h"
-#include "DrawableTex2D.h"
 #include "Terrain.h"
 #include "Building.h"
 #include "Mirror.h"

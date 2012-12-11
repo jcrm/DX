@@ -89,7 +89,8 @@ void SceneApp::initApp(){
 	mii.LayerMapFilename1	= L"WoodCrate02.dds";
 	mii.SpecMapFilename		= L"defaultspec.dds";
 	mMirror.init(md3dDevice,mii);
-	mBuilding1.init(md3dDevice, 8, 12, 6);
+
+	mBuilding1.init(md3dDevice, 16, 24, 12);
 
 	mLightType = 0;
 	// Parallel light.

@@ -5,7 +5,6 @@
 #include "Effects.h"
 #include "D3DUtil.h"
 #include "Cube.h"
-#include "Box.h"
 #include "Vertex.h"
 
 class Mirror{
