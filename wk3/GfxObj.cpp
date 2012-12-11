@@ -5,7 +5,7 @@
 GfxObj::GfxObj()
 : mNumVertices(0),mNumIndices(0), mNumFaces(0), 
 md3dDevice(0), mVB(0), mIB(0), scale(1,1,1),pos(0,0,0),
-theta(0,0,0), indexed(true), mLayer0(0), mVertexType(0),
+theta(0,0,0), indexed(true), reflected(false), mLayer0(0), mVertexType(0),
 mLayer1(0), mLayer2(0), mLayer3(0), mLayer4(0), mBlendMap(0), 
 mfxSpecMapVar(0), mSpecMap(0) ,mfxWVPVar(0), mfxWorldVar(0), mTech(0), 
 mfxLayer0Var(0), mfxLayer1Var(0),mfxLayer2Var(0), mfxLayer3Var(0), 
@@ -38,16 +38,20 @@ void GfxObj::Translate(float x, float y, float z){
 	pos.z = z;
 	setTrans();
 }
+void GfxObj::Scale(float x, float y, float z){
+	scale.x = x;
+	scale.y = y;
+	scale.z = z;
+	setTrans();
+}
 D3DXMATRIX GfxObj::GetWorld(){
 	return world;
 }
 // Virtual methods.  Derived client class overrides these methods to 
 // implement specific object requirements.
 
-void GfxObj::init (ID3D10Device* device, DWORD nV, DWORD nF){
+void GfxObj::init (ID3D10Device* device){
 	md3dDevice=		device;
-	mNumVertices=	nV;
-	mNumFaces=		nF;
 }
 void GfxObj::buildVB(VertexPNTList& vertices){
 	// Create vertex buffer
@@ -120,4 +124,12 @@ void GfxObj::draw(){
 			md3dDevice->Draw(mNumVertices, 0);
 		}
 	}
+	
+}
+void GfxObj::drawR(){
+	UINT stride = sizeof(VertexPNT);
+	UINT offset = 0;
+	md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
+	md3dDevice->IASetIndexBuffer(mIB, DXGI_FORMAT_R32_UINT, 0);
+	md3dDevice->DrawIndexed(mNumFaces*3, 0, 0);
 }

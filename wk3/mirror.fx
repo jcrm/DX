@@ -6,7 +6,6 @@
 
 
 #include "lighthelper.fx"
- RasterizerState rs {CullMode = None;};
  
 cbuffer cbPerFrame
 {
@@ -85,7 +84,6 @@ technique10 MirrorTech
 {
     pass P0
     {
-		SetRasterizerState(rs);
         SetVertexShader( CompileShader( vs_4_0, VS() ) );
         SetGeometryShader( NULL );
         SetPixelShader( CompileShader( ps_4_0, PS() ) );

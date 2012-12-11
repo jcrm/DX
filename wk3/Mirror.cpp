@@ -6,7 +6,8 @@
 #include "Light.h"
 #include "D3DUtil.h"
 
-Mirror::Mirror():mVB(0){
+Mirror::Mirror(){
+	D3DXMatrixTranslation(&mReflectWorld, 0.0f, 1.0f, -4.0f);
 	D3DXMatrixIdentity(&mWorld);
 	D3DXMatrixIdentity(&mProj);
 	D3DXMatrixIdentity(&mView);
@@ -18,29 +19,40 @@ Mirror::~Mirror(){
 }
 void Mirror::init(ID3D10Device* device, const InitInfo& initInfo){
 	md3dDevice = device;
+	mCrateMesh.init(md3dDevice, 1.0f);
 
 	mTech			 =fx::MirrorFX->GetTechniqueByName("MirrorTech");
-	mfxWorldVar		 =fx::MirrorFX->GetVariableByName("gWorld")->AsMatrix();
-	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gEyePosW");
-	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gLight");
 	mfxWVPVar		 =fx::MirrorFX->GetVariableByName("gWVP")->AsMatrix();
+	mfxWorldVar		 =fx::MirrorFX->GetVariableByName("gWorld")->AsMatrix();
 	mfxDiffuseMapVar =fx::MirrorFX->GetVariableByName("gDiffuseMap")->AsShaderResource();
 	mfxSpecMapVar	 =fx::MirrorFX->GetVariableByName("gSpecMap")->AsShaderResource();
+	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gEyePosW");
+	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gLight");
 	mfxTexMtxVar	 =fx::MirrorFX->GetVariableByName("gTexMtx")->AsMatrix();
+
+	mInfo = initInfo;
 
 	mNumVertices=	6;
 	mNumFaces=		2;
 
-	mInfo = initInfo;
-
-	mMirrorDiffuseMapRV  = GetTextureMgr().createTex(initInfo.LayerMapFilename0);
-	mSpecMap  = GetTextureMgr().createTex(initInfo.SpecMapFilename);
-
 	CreateDesc();
 	build();
 
+	mMirrorDiffuseMapRV		= GetTextureMgr().createTex(initInfo.LayerMapFilename0);
+	mObjectsDiffuseMapRV	= GetTextureMgr().createTex(initInfo.LayerMapFilename1);
+	mSpecMap				= GetTextureMgr().createTex(initInfo.SpecMapFilename);
+
 }
 void Mirror::CreateDesc(){
+
+	D3D10_RASTERIZER_DESC rsDesc;
+	ZeroMemory(&rsDesc, sizeof(D3D10_RASTERIZER_DESC));
+	rsDesc.FillMode = D3D10_FILL_SOLID;
+	rsDesc.CullMode = D3D10_CULL_BACK;
+	rsDesc.FrontCounterClockwise = true;
+
+	HR(md3dDevice->CreateRasterizerState(&rsDesc, &mCullCWRS));
+
 	D3D10_DEPTH_STENCIL_DESC dsDesc;
 	dsDesc.DepthEnable		= true;
 	dsDesc.DepthWriteMask	= D3D10_DEPTH_WRITE_MASK_ALL;
@@ -124,8 +136,8 @@ void Mirror::draw(){
 	md3dDevice->IASetInputLayout(InputLayout::PosNormalTex);
 	md3dDevice->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);   
 
-	mView = GetCamera().view();
-	mProj = GetCamera().proj();
+	D3DXMATRIX mView = GetCamera().view();
+	D3DXMATRIX mProj = GetCamera().proj();
 	
 	Light mParallelLight;
 	mParallelLight.dir		= D3DXVECTOR3(0.57735f, -0.57735f,0.57735f);
@@ -145,6 +157,16 @@ void Mirror::draw(){
 
 		UINT stride = sizeof(VertexPNT);
 		UINT offset = 0;
+
+		mWVP = mReflectWorld*mView*mProj;
+		mfxWVPVar->SetMatrix((float*)&mWVP);
+		mfxWorldVar->SetMatrix((float*)&mReflectWorld);
+		mfxDiffuseMapVar->SetResource(mObjectsDiffuseMapRV);
+		mfxSpecMapVar->SetResource(mSpecMap);
+		mfxTexMtxVar->SetMatrix((float*)&mIdentityTexMtx);
+        pass->Apply(0);
+		mCrateMesh.draw();
+
 		/*		Draw Mirror		*/
 		mWVP = mWorld*mView*mProj;
 		mfxWVPVar->SetMatrix((float*)&mWVP);
@@ -160,5 +182,63 @@ void Mirror::draw(){
 		md3dDevice->Draw(mNumVertices,0);
 
 		md3dDevice->OMSetDepthStencilState(0,0);
+		//draw reflected world
+		D3DXPLANE mirrorPlane(0.0f, 0.0f, 1.0f, 0.0f); // xy plane
+		 
+		D3DXMATRIX R;
+		_tmp_D3DXMatrixReflect(&R, &mirrorPlane);
+		D3DXMATRIX W = mReflectWorld*R;
+		mWVP = W*mView*mProj;
+		mfxWVPVar->SetMatrix((float*)&mWVP);
+		mfxWorldVar->SetMatrix((float*)&W);
+		mfxDiffuseMapVar->SetResource(mObjectsDiffuseMapRV);
+		mfxSpecMapVar->SetResource(mSpecMap);
+		mfxTexMtxVar->SetMatrix((float*)&mIdentityTexMtx);
+
+		D3DXVECTOR3 oldDir = mParallelLight.dir;
+		D3DXVec3TransformNormal(&mParallelLight.dir, &mParallelLight.dir, &R);
+		mfxLightVar->SetRawValue(&mParallelLight, 0, sizeof(Light));	
+        pass->Apply(0);
+
+		md3dDevice->RSSetState(mCullCWRS);
+		float blendf[] = {0.65f, 0.65f, 0.65f, 1.0f};
+		md3dDevice->OMSetBlendState(mDrawReflectionBS, blendf, 0xffffffff); 
+		md3dDevice->OMSetDepthStencilState(mDrawReflectionDSS, 1);
+		mCrateMesh.draw();
+
+		md3dDevice->OMSetDepthStencilState(0, 0);
+		md3dDevice->OMSetBlendState(0, blendf, 0xffffffff);
+		md3dDevice->RSSetState(0);	
+		mParallelLight.dir = oldDir; // restore
 	}
 }
+
+D3DXMATRIX* Mirror::_tmp_D3DXMatrixReflect(D3DXMATRIX* pMat, const D3DXPLANE* pPlane)
+    {
+       if(!pMat || !pPlane) return NULL;
+
+       D3DXPLANE n;
+       D3DXPlaneNormalize(&n, pPlane);
+
+       pMat->_11 = -2.0f * n.a * n.a + 1.0f;
+       pMat->_12 = -2.0f * n.b * n.a;
+       pMat->_13 = -2.0f * n.c * n.a;
+       pMat->_14 = 0.0f;
+
+       pMat->_21 = -2.0f * n.a * n.b;
+       pMat->_22 = -2.0f * n.b * n.b + 1.0f;
+       pMat->_23 = -2.0f * n.c * n.b;
+       pMat->_24 = 0.0f;
+
+       pMat->_31 = -2.0f * n.a * n.c;
+       pMat->_32 = -2.0f * n.b * n.c;
+       pMat->_33 = -2.0f * n.c * n.c + 1.0f;
+       pMat->_34 = 0.0f;
+
+       pMat->_41 = -2.0f * n.a * n.d;
+       pMat->_42 = -2.0f * n.b * n.d;
+       pMat->_43 = -2.0f * n.c * n.d;
+       pMat->_44 = 1.0f;
+
+       return pMat;
+    }

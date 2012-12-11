@@ -28,10 +28,12 @@ public:
 	};
 	GfxObj();
 	~GfxObj();
-	virtual void init(ID3D10Device* device, DWORD nV=0, DWORD nF=0);
+	virtual void init(ID3D10Device* device);
 	virtual void draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType);
 	virtual void draw();
+	virtual void drawR();
 	void setTrans();
+	void Scale(float x, float y, float z);
 	void Translate(float x, float y, float z);
 	D3DXMATRIX GetWorld();
 
@@ -44,6 +46,7 @@ protected:
 	ID3D10Buffer* mVB;
 	ID3D10Buffer* mIB;
 	bool indexed;
+	bool reflected;
 	int mVertexType;
 
 	InitInfo mInfo;

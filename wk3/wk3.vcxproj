@@ -102,8 +102,10 @@
     <None Include="stone.dds" />
     <None Include="stone2.dds" />
     <None Include="terrain.fx" />
+    <None Include="WoodCrate02.dds" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
@@ -126,6 +128,7 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />

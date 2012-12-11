@@ -17,7 +17,11 @@ void Cube::draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType){
 	GfxObj::draw(mEyePos, mLights, mLightType);
 }
 void Cube::draw(){
-	GfxObj::draw();
+	if(reflected){
+		GfxObj::drawR();
+	}else{
+		GfxObj::draw();
+	}
 }
 float Cube::GetPosX(){
 	return pos.x;
@@ -163,6 +167,16 @@ void Cube::init(ID3D10Device* device){
 	mNumFaces=		12;
 	mNumIndices =	36;
 
+	buildVB();
+	buildIB();
+}
+void Cube::init(ID3D10Device* device, bool temp, int t){
+	md3dDevice		= device;
+	mVertexType		= 2;
+	mNumVertices	= 8;
+	mNumFaces		= 12;
+	mNumIndices		= 36;
+	reflected = true;
 	buildVB();
 	buildIB();
 }

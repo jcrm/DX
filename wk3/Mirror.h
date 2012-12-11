@@ -4,6 +4,7 @@
 #include <string>
 #include "Effects.h"
 #include "D3DUtil.h"
+#include "Box.h"
 #include "Vertex.h"
 
 class Mirror{
@@ -11,8 +12,6 @@ public:
 	struct InitInfo{
 		std::wstring LayerMapFilename0;
 		std::wstring LayerMapFilename1;
-		std::wstring LayerMapFilename2;
-		std::wstring LayerMapFilename3;
 		std::wstring SpecMapFilename;
 	};
 	Mirror();
@@ -26,11 +25,14 @@ protected:
 	DWORD mNumFaces;
 	DWORD mNumIndices;
 
+	Box mCrateMesh;
+
 	InitInfo mInfo;
 	ID3D10Device* md3dDevice;
 	ID3D10Buffer* mVB;
 	ID3D10Buffer* mIB;
 
+	ID3D10RasterizerState* mCullCWRS;
 	ID3D10BlendState* mDrawReflectionBS;
 	ID3D10DepthStencilState* mDrawMirrorDSS;
 	ID3D10DepthStencilState* mDrawReflectionDSS;
@@ -43,6 +45,7 @@ protected:
 	ID3D10EffectMatrixVariable* mfxTexMtxVar;
 
 	ID3D10ShaderResourceView* mMirrorDiffuseMapRV;
+	ID3D10ShaderResourceView* mObjectsDiffuseMapRV;
 	ID3D10ShaderResourceView* mSpecMap;
 
 	ID3D10EffectShaderResourceVariable* mfxDiffuseMapVar;
@@ -62,6 +65,7 @@ protected:
 	typedef std::vector<VertexPNT> VertexPNTList;
 
 	void CreateDesc();
+	D3DXMATRIX* Mirror::_tmp_D3DXMatrixReflect(D3DXMATRIX* pMat, const D3DXPLANE* pPlane);
 };
 
 #endif
