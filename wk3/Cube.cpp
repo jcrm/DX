@@ -79,7 +79,6 @@ void Cube::buildVB(){
 	vertices.push_back(v);
 	v.Update(+1.0f, -1.0f, -1.0f, 0.0f,  0.0f, -1.0f,1.0,0.0);
 	vertices.push_back(v);
-	//test
 	//Left Face
 	v.Update(-1.0f, -1.0f, +1.0f,-1.0f,  0.0f, 0.0f,0.0,0.0);
 	vertices.push_back(v);
