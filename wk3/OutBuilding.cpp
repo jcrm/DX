@@ -263,20 +263,19 @@ void OutBuilding::draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType){
         
 		UINT stride = sizeof(VertexPNT);
 		UINT offset = 0;
-
+		//walls
 		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
-
 		mfxLayer0Var->SetResource(mLayer0);
 		pass->Apply(0);
 		md3dDevice->DrawIndexed(36, 0,0);
-
+		//floor
 		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
 		mfxLayer0Var->SetResource(mLayer1);
 		pass->Apply(0);
 		md3dDevice->DrawIndexed(6, 36,0);
-
+		//ceilling
 		md3dDevice->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 		md3dDevice->IASetIndexBuffer( mIB, DXGI_FORMAT_R32_UINT, 0 );
 		mfxLayer0Var->SetResource(mLayer2);

@@ -6,7 +6,16 @@
 
 
 #include "lighthelper.fx"
- 
+ cbuffer cbFixed { 
+ // For this demo, we hardcode the fog values. However, in a real 
+ // application, the program may want to change the fog settings 
+ // at run time; for example, to fade the fog in and out based on 
+ // the time of day or the location of the game player.
+	float gFogStart = 5.0f; 
+	float gFogRange = 140.0f; 
+	float3 gFogColor = (0.7f, 0.7f, 0.7f);
+};
+
  
 cbuffer cbPerFrame
 {
@@ -52,6 +61,7 @@ struct VS_OUT
     float4 normalW		: NORMAL;
     float2 tiledUV      : TEXCOORD0;
     float2 stretchedUV  : TEXCOORD1; 
+	float fogLerp		: FOG;
 
 };
  
@@ -71,7 +81,9 @@ VS_OUT VS(VS_IN vIn)
 	vOut.tiledUV     = 16*vIn.texC;
 	vOut.stretchedUV = vIn.texC;
 
-	
+	float d = distance(vOut.posW, gEyePosW); 
+	vOut.fogLerp = saturate( (d - gFogStart) / gFogRange );
+
 	return vOut;
 }
 
@@ -115,8 +127,12 @@ float4 PS(VS_OUT pIn) : SV_Target
 	else if(gLightType == 2){	//Parallel
 		litColor = Spotlight(v, gLight, gEyePosW, 0);
 	}
+	// Blend the fog color and the lit color. 
+	float3 foggedColor = lerp(litColor, gFogColor, pIn.fogLerp);
+
 	//shade*diffuse component
-	return float4(litColor,diffuse.a);
+	return float4(foggedColor,diffuse.a);
+//	return float4(litColor,diffuse.a);
 }
 
 technique10 MultiTexTech

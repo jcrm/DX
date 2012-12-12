@@ -172,7 +172,7 @@ void D3DApp::updateScene(float dt){
 		// Reset for next average.
 		frameCnt = 0;
 		t_base  += 1.0f;
-	}
+	}if(frameCnt%5==0){
 	// Update angles based on input to orbit camera around scene.
 	if(GetAsyncKeyState('A') & 0x8000)	GetCamera().MoveLeft();
 	if(GetAsyncKeyState('D') & 0x8000)	GetCamera().MoveRight();
@@ -182,7 +182,7 @@ void D3DApp::updateScene(float dt){
 	if(GetAsyncKeyState('X') & 0x8000)	GetCamera().MoveDown();
 
 	
-	if(frameCnt%5==0){
+	
 		//look around the screen using the mouse
 		if(MousePos.x < (50)){
 			GetCamera().OnlyYaw(-2);
