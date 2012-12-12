@@ -144,7 +144,7 @@ void SceneApp::drawScene(){
 	md3dDevice->OMSetDepthStencilState(0, 0);
 	float blendFactors[] = {0.0f, 0.0f, 0.0f, 0.0f};
 	md3dDevice->OMSetBlendState(0, blendFactors, 0xffffffff);
-	
+	mEyePos = GetCamera().position();
 	mLand.draw();
 	thisCube.draw(mEyePos, mLights, mLightType);
 	thisSphere.Translate(5.0f,0.0f,0.0f);
@@ -152,7 +152,7 @@ void SceneApp::drawScene(){
 	mBuilding1.Translate(0.0f,-2.0f,5.0f);
 	mBuilding1.draw(mEyePos, mLights, mLightType);
 	mMirror.Translate(8.0f,-2.0f,20.8f);
-	mMirror.draw(mEyePos, mLights);
+	mMirror.draw(mEyePos, mLights, mLightType);
 	// Draw sky last to save fill rate.
 	mSky.draw();
 	// We specify DT_NOCLIP, so we do not care about width/height of the rect.

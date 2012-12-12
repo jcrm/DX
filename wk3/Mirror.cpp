@@ -28,7 +28,7 @@ void Mirror::init(ID3D10Device* device, const InitInfo& initInfo){
 	mfxEyePosVar	 =fx::MirrorFX->GetVariableByName("gEyePosW");
 	mfxLightVar		 =fx::MirrorFX->GetVariableByName("gLight");
 	mfxTexMtxVar	 =fx::MirrorFX->GetVariableByName("gTexMtx")->AsMatrix();
-
+	mfxLightType	= fx::MirrorFX->GetVariableByName("gLightType")->AsScalar();
 
 	mInfo = initInfo;
 
@@ -129,7 +129,7 @@ void Mirror::build(){
     vinitData.pSysMem = &vertices[0];
     HR(md3dDevice->CreateBuffer(&vbd, &vinitData, &mVB));
 }
-void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
+void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType){
 	setTrans();
 	md3dDevice->OMSetDepthStencilState(0,0);
 	float blendFactors[]= {0.0f, 0.0f, 0.0f, 0.0f};
@@ -140,6 +140,11 @@ void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 	D3DXMATRIX mView = GetCamera().view();
 	D3DXMATRIX mProj = GetCamera().proj();
 	
+	mfxEyePosVar->SetRawValue(&mEyePos, 0, sizeof(D3DXVECTOR3));
+	mfxLightVar->SetRawValue(&mLights[mLightType],0,sizeof(Light));
+	mfxLightType->SetInt(mLightType);
+	UINT stride = sizeof(VertexPNT);
+	UINT offset = 0;
 
 	D3D10_TECHNIQUE_DESC techDesc;
 	mTech->GetDesc(&techDesc);
@@ -147,12 +152,7 @@ void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 		
 		ID3D10EffectPass* pass = mTech->GetPassByIndex(p);
 		
-		mfxEyePosVar->SetRawValue(&mEyePos, 0, sizeof(D3DXVECTOR3));
-		mfxLightVar->SetRawValue(&mLights[0],0,sizeof(Light));
-
-		UINT stride = sizeof(VertexPNT);
-		UINT offset = 0;
-
+		//draw cube
 		mWVP = mReflectWorld*mWorld*mView*mProj;
 		mfxWVPVar->SetMatrix((float*)&mWVP);
 		mfxWorldVar->SetMatrix((float*)&mReflectWorld);
@@ -161,7 +161,6 @@ void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 		mfxTexMtxVar->SetMatrix((float*)&mIdentityTexMtx);
         pass->Apply(0);
 		mCrate.draw();
-
 		/*		Draw Mirror		*/
 		mWVP = mWorld*mView*mProj;
 		mfxWVPVar->SetMatrix((float*)&mWVP);
@@ -191,9 +190,9 @@ void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 		mfxSpecMapVar->SetResource(mSpecMap);
 		mfxTexMtxVar->SetMatrix((float*)&mIdentityTexMtx);
 
-		D3DXVECTOR3 oldDir = mLights[0].dir;
-		D3DXVec3TransformNormal(&mLights[0].dir, &mLights[0].dir, &R);
-		mfxLightVar->SetRawValue(&mLights[0], 0, sizeof(Light));	
+		D3DXVECTOR3 oldDir = mLights[mLightType].dir;
+		D3DXVec3TransformNormal(&mLights[mLightType].dir, &mLights[mLightType].dir, &R);
+		mfxLightVar->SetRawValue(&mLights[mLightType], 0, sizeof(Light));	
 		pass->Apply(0);
 
 		md3dDevice->RSSetState(mCullCWRS);
@@ -205,7 +204,7 @@ void Mirror::draw(D3DXVECTOR3 mEyePos, Light mLights[]){
 		md3dDevice->OMSetDepthStencilState(0, 0);
 		md3dDevice->OMSetBlendState(0, blendf, 0xffffffff);
 		md3dDevice->RSSetState(0);	
-		mLights[0].dir = oldDir; // restore
+		mLights[mLightType].dir = oldDir; // restore
 	}
 }
 void Mirror::setTrans(void){

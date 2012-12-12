@@ -9,6 +9,7 @@
  
 cbuffer cbPerFrame
 {
+	int gLightType;
 	Light gLight;
 	float3 gEyePosW;
 };
@@ -77,7 +78,16 @@ float4 PS(VS_OUT pIn) : SV_Target
     
 	// Compute the lit color for this pixel.
     SurfaceInfo v = {pIn.posW, normalW, diffuse, spec};
-	float3 litColor = ParallelLight(v, gLight, gEyePosW, 0);
+	float3 litColor;
+	if(gLightType == 0){	//Parallel
+		litColor = ParallelLight(v, gLight, gEyePosW, 0);
+	}
+	else if(gLightType == 1){	//Paralle
+		litColor = PointLight(v, gLight, gEyePosW, 0);
+	}
+	else if(gLightType == 2){	//Parallel
+		litColor = Spotlight(v, gLight, gEyePosW, 0);
+	}
     
     return float4(litColor, diffuse.a);
 }

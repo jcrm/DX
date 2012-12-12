@@ -18,7 +18,7 @@ public:
 	~Mirror();
 	void init(ID3D10Device* device, const InitInfo& initInfo);
 	void build();
-	void draw(D3DXVECTOR3 mEyePos, Light mLights[]);
+	void draw(D3DXVECTOR3 mEyePos, Light mLights[], int mLightType);
 	void setTrans();
 	void Translate(float x, float y, float z);
 protected:
@@ -33,7 +33,7 @@ protected:
 	ID3D10Device* md3dDevice;
 	ID3D10Buffer* mVB;
 	ID3D10Buffer* mIB;
-
+	ID3D10EffectScalarVariable* mfxLightType;
 	ID3D10RasterizerState* mCullCWRS;
 	ID3D10BlendState* mDrawReflectionBS;
 	ID3D10DepthStencilState* mDrawMirrorDSS;
